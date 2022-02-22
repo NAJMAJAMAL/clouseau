@@ -102,6 +102,8 @@ object SupportedAnalyzers {
           createAnalyzerInt(name, map)
         case None =>
           None
+        case _ =>
+          None
       }
     case _ =>
       None
