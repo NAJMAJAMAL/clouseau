@@ -102,8 +102,8 @@ object SupportedAnalyzers {
           createAnalyzerInt(name, map)
         case None =>
           None
-        case _ =>
-          None
+        case Some(other) =>
+          throw new IllegalArgumentException("no_such_analyzer: " + other)
       }
     case _ =>
       None
