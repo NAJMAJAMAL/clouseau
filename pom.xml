@@ -20,14 +20,26 @@
     <scala.plugin.version>3.1.0</scala.plugin.version>
     <tika-version>1.0</tika-version>
     <slf4j.version>1.7.32</slf4j.version>
+    <netty.version>4.1.68.Final</netty.version>
   </properties>
 
   <repositories>
+    <repository>
+        <id>central</id>
+        <name>Central Repository</name>
+        <url>https://repo.maven.apache.org/maven2</url>
+        <layout>default</layout>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository> 
+
     <repository>
       <id>CloudantPublicRepo</id>
       <name>Cloudant Public Repo</name>
       <url>https://maven.cloudant.com/repo/</url>
     </repository>
+
   </repositories>
 
   <dependencies>
@@ -142,6 +154,15 @@
       <version>${slf4j.version}</version>
       <scope>test</scope>
     </dependency>
+
+   <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-all</artifactId>
+    <version>${netty.version}</version>
+</dependency>
+
+
   </dependencies>
 
   <build>
@@ -271,13 +292,17 @@
               <minimizeJar>false</minimizeJar>
               <artifactSet>
                 <includes>
-                  <include>org.jboss.netty</include>
+                  <!-- <include>org.jboss.netty</include>
+                  <exclude>org/jboss/netty/channel/socket/http/</exclude>
+                  <exclude>org/jboss/netty/handler/codec/http/</exclude> -->
+                  <include>io.netty</include> 
                   <include>org.apache.lucene:lucene-queryparser</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>org.jboss.netty</artifact>
+                  <!-- <artifact>org.jboss.netty</artifact> -->
+                  <artifact>io.netty</artifact>
                   <excludes>
                     <exclude>org/jboss/netty/channel/socket/http/</exclude>
                     <exclude>org/jboss/netty/handler/codec/http/</exclude>

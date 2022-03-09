@@ -22,6 +22,7 @@ import scala.collection.immutable.Map
 import scala.collection.JavaConversions._
 import scalang._
 import org.jboss.netty.buffer.ChannelBuffer
+//import io.netty.buffer.ByteBuf
 import org.apache.lucene.util.BytesRef
 import org.apache.lucene.facet.params.FacetIndexingParams
 import org.apache.lucene.facet.sortedset.SortedSetDocValuesFacetFields
@@ -263,7 +264,7 @@ object ClouseauTypeEncoder extends TypeEncoder {
       None
   }
 
-  def encode(obj: Any, buffer: ChannelBuffer) = obj match {
+  def encode(obj: Any, buffer: ChannelBuffer) = obj match { //ByteBuf
     case bytesRef: BytesRef =>
       buffer.writeByte(109)
       buffer.writeInt(bytesRef.length)
@@ -295,7 +296,7 @@ object ClouseauTypeDecoder extends TypeDecoder {
       None
   }
 
-  def decode(typeOrdinal: Int, buffer: ChannelBuffer): Any = typeOrdinal match {
+  def decode(typeOrdinal: Int, buffer: ChannelBuffer): Any = typeOrdinal match { //ByteBuf
     case 107 =>
       val length = buffer.readUnsignedShort
       val b = new ArrayBuffer[Int](length)
